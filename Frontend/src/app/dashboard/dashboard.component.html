@@ -1,0 +1,12 @@
+<h3 *ngIf="loggedInUser">Welcome {{ loggedInUser.fullName }}</h3>
+
+<div *ngIf="loggedInUser">
+  <app-products-admin *ngIf="loggedInUser.role === 'Admin'"></app-products-admin>
+
+  <app-products-employee *ngIf="loggedInUser.role === 'Employee'"></app-products-employee>
+
+  <app-products *ngIf="loggedInUser.role === 'Customer'"> </app-products>
+
+</div>
+<!-- <app-products-admin></app-products-admin> -->
+<!-- <app-products> </app-products> -->

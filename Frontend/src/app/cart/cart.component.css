@@ -1,0 +1,56 @@
+/* Add your desired styles here */
+
+/* Center the dialog title */
+.mat-dialog-title {
+    text-align: center;
+  }
+  
+  /* Style the table */
+  .table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #343a40;
+    color: #ffffff;
+  }
+  
+  /* Style the total and discount rows */
+  .table tfoot th {
+    background-color: #343a40;
+    color: #ffffff;
+  }
+  
+  /* Style the buttons in mat-dialog-actions */
+  mat-dialog-actions button {
+    margin: 0 0.5rem;
+  }
+  
+  /* Optional: Add some spacing around the content */
+  mat-dialog-content {
+    padding: 1rem;
+  }
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  

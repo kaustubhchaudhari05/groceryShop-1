@@ -1,0 +1,68 @@
+<h1 mat-dialog-title>Cart</h1>
+<mat-dialog-content *ngIf="mergedList && mergedList.length > 0; else addProductsContent">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Items
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+
+                </th>
+            </tr>
+            <tr *ngFor="let item of mergedList; index as i">
+                <td>
+                    {{i+1}}
+                </td>
+                <td>
+                    {{item.productName}}
+                </td>
+                <td>
+                    {{item.productQuantity}}
+                </td>
+                <td>
+                    {{item.sellPrice | currency:'INR':'symbol':'1.2-2'}}
+                </td>
+                <td>
+                    {{item.sellPrice * item.productQuantity | currency:'INR':'symbol':'1.2-2'}}
+                </td>
+                <td>
+                    <button mat-raised-button (click)="removeItem(item.id)">Remove</button>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="5">Total</th>
+                <td>{{total | currency:'INR':'symbol':'1.2-2'}}</td>
+            </tr>
+            <tr>
+                <th colspan="5">Discount</th>
+                <td>{{data.discount}} %</td>
+            </tr>
+            <tr>
+                <th colspan="5">Net Total</th>
+                <td>{{total - (total*data.discount/100)}}</td>
+            </tr>
+        </thead>
+    </table>
+</mat-dialog-content>
+<ng-template #addProductsContent>
+    <div class="center-content">
+        <p>No products in the cart. <br> Add products to the cart.</p>
+    </div>
+</ng-template>
+<mat-dialog-actions class="actions">
+    <button mat-raised-button (click)="closeMe()">Close</button>
+    <button mat-raised-button (click)="pSuccessfull()">Purchase</button>
+</mat-dialog-actions>

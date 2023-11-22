@@ -1,0 +1,78 @@
+<link href="https://cdn.jsdelivr.net/npm/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<div class="mat-typography container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <button mat-raised-button color="primary" class="custom-button" (click)="allPurchases()">All Reports</button>
+      <button mat-raised-button color="primary" class="custom-button" (click)="last24Hour()">Sales in Last 24 Hours</button>
+      <button mat-raised-button color="primary" class="custom-button" (click)="monthwise()">Month Wise Sale</button>
+        <input type="month" ngModel="String" [formControl]="month">
+    </div>
+  </div>
+
+  <div class="row">
+    <ng-container *ngIf="purchases && purchases.length > 0; else noPurchases">
+      <ng-container *ngFor="let purchase of purchases; let i = index">
+        <mat-card class="mat-elevation-z8 mb-3" style="width: 400px; margin: 10px;">
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>{{ purchase.purchaseUser }}</mat-card-title>
+              <mat-card-subtitle>{{ purchase.gender === 'm' ? 'Male' : 'Female' }}</mat-card-subtitle>
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>
+            <p><strong>Discount:</strong> {{ purchase.purchaseDiscount }}</p>
+            <p><strong>Date:</strong> {{ purchase.purchaseDate }}</p>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Rate</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of purchase.productforTable">
+                  <td>{{ product.purchaseProduct }}</td>
+                  <td>{{ product.purchaseRate }}</td>
+                  <td>{{ product.purchaseQuantity }}</td>
+                  <td>{{ convertToInteger(product.purchaseRate) * convertToInteger(product.purchaseQuantity) }}</td>
+                </tr>
+                <tr>
+                  <td [colSpan]="3">
+                    <strong>Total:</strong> 
+                  </td>
+                  <td>
+                    {{ calculateTotal(purchase.productforTable) }}
+                  </td>
+                </tr>
+                <tr>
+                  <td [colSpan]="3">
+                    <strong>Discount({{purchase.purchaseDiscount}}%):</strong> 
+                  </td>
+                  <td>
+                    {{ purchase.purchaseDiscount*calculateTotal(purchase.productforTable)/100 }}
+                  </td>
+                </tr>
+                <tr>
+                  <td [colSpan]="3">
+                    <strong>Net Total:</strong> 
+                  </td>
+                  <td>
+                    {{ calculateTotal(purchase.productforTable) - (purchase.purchaseDiscount*calculateTotal(purchase.productforTable)/100) }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </ng-container>
+    <ng-template #noPurchases>
+      <div class="col-12 text-center mt-3">
+        <p>No purchases available.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

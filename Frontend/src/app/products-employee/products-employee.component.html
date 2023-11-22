@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center">
+<div Style="width: 60%;" >
+  <mat-accordion class="mat-accordion">
+  <mat-expansion-panel *ngFor="let category of categories">
+    <mat-expansion-panel-header class="mat-expansion-panel-header">
+      <mat-panel-title class="d-flex justify-content-between align-items-center">
+        {{ category.categoryName }}
+      <div>
+        <button mat-raised-button style="margin-right: 30px;" color="accent" class="ml-auto" (click)="addProd()">
+          <i class="bi bi-cart-plus"  ></i> Add Item
+        </button>
+      </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <div class="mat-expansion-panel-content">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of category.products">
+            <td>{{ item.id }}</td>
+            <td>{{ item.productName }}</td>
+            <td>{{ item.sellPrice }}</td>
+            <td>
+              <button mat-raised-button color="primary" (click)="editProd(item.id)">
+                <i class="bi bi-cart-plus" ></i> Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+</div>
+</div>

@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b6e1ff;">
+  <a class="navbar-brand" routerLink="/"> {{ title }} </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="!loggedInUser">
+        <a class="nav-link active" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!loggedInUser">
+        <a class="nav-link" routerLink="/signup">Signup</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="/users">Users</a>
+      </li> -->
+      <li class="nav-item" *ngIf="loggedInUser">
+        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item" *ngIf="loggedInUser?.role==='Admin'">
+        <a class="nav-link"   routerLink="/reports">Reports</a>
+      </li>
+    </ul>
+  </div>
+  <a *ngIf="loggedInUser" (click)="logout()" class="nav-item mr-3 nav-link p-3" style="cursor: pointer;" >Logout</a>
+</nav>
+<br>
+<div>
+<router-outlet></router-outlet>
+<div class="container" style="width: 500px; margin: auto; margin-top: 50px;" *ngIf="router.url === '/'">
+    <h1>Welcome To Our Grocery Shop</h1>
+</div>
+</div>
